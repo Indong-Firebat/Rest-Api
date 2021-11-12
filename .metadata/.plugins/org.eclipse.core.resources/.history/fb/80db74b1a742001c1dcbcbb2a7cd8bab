@@ -1,0 +1,92 @@
+package kr.co.exit.study.restapi.api;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import kr.co.exit.study.restapi.biz.guide.domain.Guide;
+import kr.co.exit.study.restapi.biz.guide.service.GuideService;
+
+@RestController
+@RequestMapping("/guide")
+public class GuideApi {
+	
+	@Autowired
+	private GuideService guideService;
+	
+	@GetMapping("/list")
+	public Map<String, Object> list() {
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		resultMap.put("list", guideService.findList(new HashMap<>()));
+		
+		return resultMap;
+	}
+	
+	@PostMapping("/create")
+	public Map<String, Object> create(@RequestBody Guide guide) {
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		guideService.add(guide);
+				
+		return resultMap;
+	}
+	
+	@PostMapping("/modify")
+	public Map<String, Object> modify(@RequestBody Guide guide) {
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		guideService.modify(guide);
+		System.out.println("guide = " + guide);
+		return resultMap;
+	}
+	
+	/*
+	@PostMapping("/remove")
+	public int remove(@RequestBody Map<String, Object> paramMap) {
+		paramMap.get("seq");
+		System.out.println(paramMap.get("seq"));
+		
+		
+		guideService.remove(seq);
+		
+		return seq;
+	}
+	*/
+	
+	@GetMapping("/remove")
+	public int remove(@RequestParam(name = "seq") Integer seq) {
+		
+		guideService.remove(seq);
+		
+		return seq;
+	}
+	
+	@GetMapping("/findOne")
+	public int findOne(@RequestParam(name = "seq") Integer seq) {
+		
+		guideService.findOne(seq);
+		System.out.println(seq);
+		
+		return seq;
+	}
+	
+	@GetMapping("/findTotalCount")
+	public Map<String, Object> findTotalCount() {
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		resultMap.put("findTotalCount", guideService.findTotalCount(new HashMap<>()));
+		System.out.println(resultMap);
+		
+		return resultMap;
+		
+	}
+}

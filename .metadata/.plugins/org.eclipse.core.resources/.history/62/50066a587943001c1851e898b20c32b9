@@ -1,0 +1,5 @@
+package kr.co.exit.study.restapi.biz.guide.domain;
+
+public class FileData {
+
+}

@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    hikari:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:mariadb://175.116.227.108:3307/study?characterEncoding=UTF-8&serverTimezone=UTC
+      username: study
+      password: study1225
